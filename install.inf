@@ -1,0 +1,12 @@
+[info]
+title=Formatter for Pascal, C++ using Embarcadero Formatter
+desc=Formats Pascal and C++ code
+type=cudatext-plugin
+subdir=cuda_fmt_embarcadero
+homepage=https://github.com/CudaText-addons/cuda_fmt_embarcadero
+
+[fmt1]
+caption=Embarcadero Format
+method=do_format
+lexers=Pascal,C++
+config=cuda_fmt_embarcadero.ini
