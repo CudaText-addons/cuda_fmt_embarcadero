@@ -4,7 +4,7 @@ import tempfile
 from cudatext import *
 from cuda_fmt import get_config_filename
 
-def do_format(source_text):
+def do_format_ex(source_text, lang_key):
 
     fn_ini = get_config_filename('Embarcadero Format')
     opt_formater_dir = ini_read(fn_ini, 'op', 'formater_directory', '')
@@ -25,14 +25,9 @@ def do_format(source_text):
         with open(file_name, 'w') as f:
             f.write(s)
 
-        if ed.get_prop(PROP_LEXER_FILE, '').lower() == 'c++':
-            rad_opt = '-cpp'
-        else:
-            rad_opt = '-delphi'
-
         cmd = '"{}" {} {} "{}"'.format(
             fn_exe,
-            rad_opt,
+            lang_key,
             '-config "{}"'.format(fn_exe_cfg) if os.path.isfile(fn_exe_cfg) else '',
             file_name
             )
@@ -52,3 +47,11 @@ def do_format(source_text):
         return s
     except:
         raise
+
+def do_format_pas(text):
+
+    return do_format_ex(text, '-delphi')
+
+def do_format_cpp(text):
+
+    return do_format_ex(text, '-cpp')
